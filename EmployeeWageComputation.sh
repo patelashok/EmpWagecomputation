@@ -1,14 +1,17 @@
 #! /bin/bash -x
-echo "Welcome Employee Wage Computation"
+
 #constants
 IS_PRESENT=1
+EMP_RATE_PER_HR=20
 
 #variable
 empCheck=$(( RANDOM % 2))
  #SELECTION
 if [  $empCheck -eq $IS_PRESENT ]
 then
-        echo "Emp is present"
+        emphrs=8
 else
-        echo "Emp is not present"
+        emphrs=0
 fi
+salary=$(( EMP_RATE_PER_HR * emphrs ))
+
