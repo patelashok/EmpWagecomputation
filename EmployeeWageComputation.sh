@@ -1,30 +1,45 @@
 #! /bin/bash -x
-#constants
-IS_PRESENT_FULL_TIME=1
-IS_PRESENT_PART_TIME=2
-WAGE_PER_HR=20
-MAX_WORKING_DAYS=20
-MAX_HRS_IN_MONTH=100
-#variable
-totalWorkinghours=0
-totalWorkingdays=0
-while [[ $totalWorkinghours -lt $MAX_HRS_IN_MONTH &&
-        $totalWorkingdays -lt $MAX_WORKING_DAYS ]]
-do
-        employeecheck=$((RANDOM%3))
-        ((totalWorkingdays++))
-        case $employeecheck in
-                $IS_PRESENT_FULL_TIME)
-                        emphrs=8;;
-                $IS_PRESENT_PART_TIME)
-                        emphrs=4;;
-                *)
-                        emphrs=0;;
+#constrants for the program
+IS_PART_TIME=1;
+IS_FULL_TIME=2;
+MAX_HRS_IN_MONTH=4;
+EMP_RATE_PER_HR=20;
+NUM_WORKING_DAYS=20;
+
+#variables
+totalEmpHrs=0;
+totalWorkingDays=0;
+
+function getWorksHrs(){
+        local $empCheck=$1
+        case $empCheck in
+                $IS_FULL_TIME)
+                        empHrs=8;;
+                $IS_PART_TIME)
+                        empHrs=4;;
+                            *)
+                        empHrs=0;;
         esac
-        totalWorkinghours=$(($totalWorkinghours + $emphrs))
+        echo $empHrs
+}
+
+function getEmpWage()
+{
+        local empHr=$1
+        echo $(($empHr*$EMP_RATE_PER_HR))
+}
+
+while [[ $totalEmpHrs -lt $MAX_HRS_IN_MONTH &&
+                   $totalWorkingDays -lt $NUM_WORKING_DAYS ]]
+do
+        ((totalWorkingDays++))
+        empCheck=$((RANDOM%3));
+        empHrs="$( getWorksHrs $empCheck )"
+        totalEmpHrs=$(($totalEmpHrs+$empHrs))
 done
 
-salary=$(( $totalWorkinghours * $WAGE_PER_HR ))
+totalSalary=$(($totalEmpHrs*$EMP_RATE_PER_HR));
+
 
 
 
