@@ -17,7 +17,7 @@ function getWorksHrs(){
                         empHrs=8;;
                 $IS_PART_TIME)
                         empHrs=4;;
-                            *)
+                                                *)
                         empHrs=0;;
         esac
         echo $empHrs
@@ -36,10 +36,9 @@ do
         empCheck=$((RANDOM%3));
         empHrs="$( getWorksHrs $empCheck )"
         totalEmpHrs=$(($totalEmpHrs+$empHrs))
+        dailyWage[$totalWorkingDays]="$( getEmpWage $empHrs )"
 done
 
 totalSalary=$(($totalEmpHrs*$EMP_RATE_PER_HR));
-
-
-
+echo ${dailyWage[@]}
 
