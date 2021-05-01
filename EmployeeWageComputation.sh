@@ -1,8 +1,8 @@
-#! /bin/bash -x
+s#! /bin/bash -x
 
 #constants
 IS_PRESENT_FULL_TIME=1
-IS_PRESENT_PART_TIME=2
+IS_PERSENT_PART_TIME=2
 EMP_RATE_PER_HR=20
 
 #variable
